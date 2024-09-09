@@ -1,0 +1,36 @@
+.not-found-bg-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-img {
+  width: 90%;
+  max-width: 340px;
+}
+
+.page-msg {
+  font-family: 'Roboto';
+  font-size: 26px;
+  color: #475569;
+  margin-bottom: 0px;
+  text-align: center;
+  margin: 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .page-msg {
+    font-size: 17px;
+  }
+}
+
+.description {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #64748b;
+  line-height: 20px;
+  text-align: center;
+  width: 80%;
+}

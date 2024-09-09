@@ -1,0 +1,283 @@
+.quiz-card {
+  justify-content: flex-start;
+}
+
+.q-count-timer-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.questions-count-container {
+  width: 101px;
+  height: 68px;
+  border-radius: 4px;
+  background-color: #d2a7b3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.q-header {
+  font-family: 'Roboto';
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.36px;
+  color: #334155;
+  margin-left: 16px;
+}
+
+.q-count {
+  font-family: 'Roboto';
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.36px;
+  color: #f8fafc;
+  margin-left: 16px;
+}
+
+.timer-container {
+  width: 45px;
+  height: 45px;
+  gap: 0px;
+  opacity: 0px;
+  border-radius: 30px;
+  border: #0ea5e9 solid 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.quiz-details-container {
+  width: 90%;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-question {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.36px;
+  color: #334155;
+}
+
+.options-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 576px) {
+  .options-container {
+    flex-direction: column;
+    flex-wrap: none;
+  }
+
+  .option-btn {
+    width: 221px;
+  }
+}
+
+.option-item-container {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+@media screen and (max-width: 576px) {
+  .option-item-container {
+    width: 90%;
+  }
+}
+
+.check-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-left: 15px;
+}
+
+.option-btn {
+  width: 80%;
+  height: 48px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #334155;
+  text-align: left;
+  padding-left: 25px;
+}
+
+.radio-item-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.radio-option {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.radio-option:checked {
+  color: #94a3b8;
+}
+
+.radio-option-text {
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.image-item-container {
+  display: flex;
+  align-items: center;
+  width: 40%;
+}
+
+@media screen and (max-width: 576px) {
+  .image-item-container {
+    width: 90%;
+  }
+}
+
+.image-option-btn {
+  width: 80%;
+  max-width: 176px;
+  height: 50px;
+  margin-bottom: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+  .image-option-btn {
+    width: 176px;
+  }
+}
+
+.option-image {
+  width: 100%;
+  height: 100%;
+}
+
+.next-btn {
+  width: 140px;
+  height: 40px;
+  background-color: #cbd5e1;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  align-self: flex-end;
+  margin-right: 6%;
+  margin-top: auto;
+  margin-bottom: 25px;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.loader-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.failure-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.failure-img {
+  width: 80%;
+  max-width: 400px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.failure-msg-container {
+  width: 90%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.failure-msg1 {
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 19.36px;
+  color: #334155;
+}
+
+.failure-msg2 {
+  font-family: 'Roboto';
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  color: #64748b;
+  margin-top: 16px;
+}
+
+.retry-btn {
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  width: 70px;
+  height: 35px;
+  border-radius: 4px;
+  opacity: 0px;
+  color: #f8fafc;
+  background: #0ea5e9;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  .failure-msg1 {
+    font-size: 18px;
+  }
+
+  .failure-msg2 {
+    font-size: 16px;
+  }
+
+  .retry-btn {
+    margin-top: 28px;
+    width: 76px;
+    height: 40px;
+    font-size: 15px;
+  }
+}
