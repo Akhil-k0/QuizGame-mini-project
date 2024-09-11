@@ -9,11 +9,11 @@ import GameReport from './components/GameReport'
 
 const App = () => (
   <Switch>
-    <Route path="/Login" component={Login} />
+    <Route exact path="/login" component={Login} />
     <ProtectedRoute exact path="/" component={Home} />
-    <ProtectedRoute path="/quiz-Game" component={QuizGame} />
-    <ProtectedRoute path="/game-results" component={GameResults} />
-    <ProtectedRoute path="/game-report" component={GameReport} />
+    <ProtectedRoute exact path="/quiz-Game" component={QuizGame} />
+    <ProtectedRoute exact path="/game-results" component={GameResults} />
+    <ProtectedRoute exact path="/game-report" component={GameReport} />
     <Route path="/not-found" component={NotFound} />
     <Redirect to="/not-found" />
   </Switch>

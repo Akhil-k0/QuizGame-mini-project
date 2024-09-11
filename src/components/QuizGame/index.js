@@ -71,20 +71,6 @@ class QuizGame extends Component {
     this.setState({intervalId})
   }
 
-  handleRetry = () => {
-    this.setState({
-      apiStatus: apiStatusInfo.initial,
-      currentQuestionIndex: 0,
-      selectedOption: null,
-      timeLeft: 15,
-      timeExpired: false,
-      correctOptionCount: 0,
-      incorrectOptionCount: 0,
-      unattemptedQuestions: [],
-    })
-    this.getQuizDetails()
-  }
-
   handleNextQuestion = () => {
     const {
       currentQuestionIndex,
@@ -182,102 +168,95 @@ class QuizGame extends Component {
     } else {
       buttonColor = '#CBD5E1'
     }
+    switch (optionType) {
+      case 'DEFAULT':
+        return (
+          <li key={option.id} className="option-item-container">
+            <button
+              type="button"
+              onClick={() => this.handleOptionSelect(option.id)}
+              disabled={selectedOption !== null || timeExpired}
+              style={{background: buttonColor, color: buttonText}}
+              className="option-btn"
+            >
+              {String.fromCharCode(65 + index)}. {option.text}
+            </button>
+            {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
+              <img
+                src={isCorrect ? checkCircleImg : closeCircleImg}
+                alt={
+                  isCorrect
+                    ? 'correct checked circle'
+                    : 'incorrect close circle'
+                }
+                className="check-img"
+              />
+            )}
+          </li>
+        )
 
-    if (optionType === 'DEFAULT') {
-      return (
-        <li
-          key={option.id}
-          className="option-item-container"
-          data-testid="questionItem"
-        >
-          <button
-            type="button"
-            onClick={() => this.handleOptionSelect(option.id)}
-            disabled={selectedOption !== null || timeExpired}
-            style={{background: buttonColor, color: buttonText}}
-            className="option-btn"
-          >
-            {String.fromCharCode(65 + index)}. {option.text}
-          </button>
-          {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
-            <img
-              src={isCorrect ? checkCircleImg : closeCircleImg}
-              alt={
-                isCorrect ? 'correct checked circle' : 'incorrect close circle'
-              }
-              className="check-img"
+      case 'IMAGE':
+        return (
+          <li key={option.id} className="image-item-container">
+            <button
+              type="button"
+              onClick={() => this.handleOptionSelect(option.id)}
+              disabled={selectedOption !== null || timeExpired}
+              className="image-option-btn"
+            >
+              <img
+                src={option.image_url}
+                alt={option.text}
+                className="option-image"
+              />
+            </button>
+            {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
+              <img
+                src={isCorrect ? checkCircleImg : closeCircleImg}
+                alt={
+                  isCorrect
+                    ? 'correct checked circle'
+                    : 'incorrect close circle'
+                }
+                className="check-img"
+              />
+            )}
+          </li>
+        )
+
+      case 'SINGLE_SELECT':
+        return (
+          <li key={option.id} className="radio-item-container">
+            <input
+              type="radio"
+              id={option.id}
+              name="option"
+              value={option.id}
+              checked={isSelected}
+              onChange={() => this.handleOptionSelect(option.id)}
+              disabled={selectedOption !== null || timeExpired}
+              className="radio-option"
             />
-          )}
-        </li>
-      )
+            <label htmlFor={option.id} className="radio-option-text">
+              {option.text}
+            </label>
+            {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
+              <img
+                src={isCorrect ? checkCircleImg : closeCircleImg}
+                alt={
+                  isCorrect
+                    ? 'correct checked circle'
+                    : 'incorrect close circle'
+                }
+                className="check-img"
+              />
+            )}
+          </li>
+        )
+
+      default:
+        return null
     }
-
-    if (optionType === 'IMAGE') {
-      return (
-        <li
-          key={option.id}
-          className="image-item-container"
-          data-testid="questionItem"
-        >
-          <button
-            type="button"
-            onClick={() => this.handleOptionSelect(option.id)}
-            disabled={selectedOption !== null || timeExpired}
-            className="image-option-btn"
-          >
-            <img
-              src={option.image_url}
-              alt={option.text}
-              className="option-image"
-            />
-          </button>
-          {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
-            <img
-              src={isCorrect ? checkCircleImg : closeCircleImg}
-              alt={
-                isCorrect ? 'correct checked circle' : 'incorrect close circle'
-              }
-              className="check-img"
-            />
-          )}
-        </li>
-      )
-    }
-
-    if (optionType === 'SINGLE_SELECT') {
-      return (
-        <li
-          key={option.id}
-          className="radio-item-container"
-          data-testid="questionItem"
-        >
-          <input
-            type="radio"
-            id={option.id}
-            name="option"
-            value={option.id}
-            checked={isSelected}
-            onChange={() => this.handleOptionSelect(option.id)}
-            disabled={selectedOption !== null || timeExpired}
-            className="radio-option"
-          />
-          <label htmlFor={option.id} className="radio-option-text">
-            {option.text}
-          </label>
-          {(isSelected || (!isSelected && selectedOption && isCorrect)) && (
-            <img
-              src={isCorrect ? checkCircleImg : closeCircleImg}
-              alt={
-                isCorrect ? 'correct checked circle' : 'incorrect close circle'
-              }
-              className="check-img"
-            />
-          )}
-        </li>
-      )
-    }
-
-    return null
   }
 
   renderQuizStart = () => {
@@ -289,7 +268,7 @@ class QuizGame extends Component {
       timeExpired,
     } = this.state
     const currentQuestion = questions[currentQuestionIndex]
-    const optionType = currentQuestion?.options_type
+    const optionType = currentQuestion.options_type
 
     return (
       <>
@@ -306,7 +285,7 @@ class QuizGame extends Component {
         </div>
         <div className="quiz-details-container">
           <p className="quiz-question">{currentQuestion.question_text}</p>
-          <ul className="options-container" data-testid="questionItem">
+          <ul className="options-container">
             {currentQuestion.options.map((option, index) =>
               this.renderOptionButton(option, index, optionType),
             )}
@@ -336,6 +315,20 @@ class QuizGame extends Component {
       <Loader type="TailSpin" color="#0EA5E9" height="55" width="55" />
     </div>
   )
+
+  handleRetry = () => {
+    this.setState({
+      apiStatus: apiStatusInfo.initial,
+      currentQuestionIndex: 0,
+      selectedOption: null,
+      timeLeft: 15,
+      timeExpired: false,
+      correctOptionCount: 0,
+      incorrectOptionCount: 0,
+      unattemptedQuestions: [],
+    })
+    this.getQuizDetails()
+  }
 
   renderQuizFailure = () => (
     <div className="failure-container">
